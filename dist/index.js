@@ -2728,6 +2728,28 @@
     }
   };
 
+  // src/user/UserList.ts
+  var UserList = class extends View {
+    constructor() {
+      super(...arguments);
+      this.collection = User.buildCollection();
+    }
+    template() {
+      this.collection.fetch();
+      let data = this.collection.models;
+      console.log(data.length);
+      return `
+            <div>
+                <select>
+                
+                    
+                    
+                </select>
+            </div>
+    `;
+    }
+  };
+
   // src/user/UserShow.ts
   var UserShow = class extends View {
     template() {
@@ -2744,6 +2766,7 @@
   var UserEdit = class extends View {
     regionsMap() {
       return {
+        userList: ".user-list",
         userShow: ".user-show",
         userForm: ".user-form"
       };
@@ -2751,7 +2774,7 @@
     template() {
       return `
         <div>
-            
+            <div class="user-list"></div>
             <div class="user-show"></div>
             <div class="user-form"></div>
         </div>
@@ -2760,6 +2783,7 @@
     onRender() {
       new UserShow(this.regions.userShow, this.model).render();
       new UserForm(this.regions.userForm, this.model).render();
+      new UserList(this.regions.userList, this.model).render();
     }
   };
 

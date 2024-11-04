@@ -2,6 +2,7 @@ import { View } from "../framework/views/View";
 import { User, UserProps } from "./User";
 
 export class UserShow extends View<User, UserProps> {
+    
     template() {
         return `
             <div>
